@@ -149,8 +149,11 @@ app.post('/getnews', (req, res) => {
   }
   let apiKey=process.env.KEY;
   console.log('topic is : ',topic);
+  let d=new Date().getDate;
+  let m=new Date().getMonth;
+  let yr=new Date().getFullYear; 
 
-  url=`https://newsapi.org/v2/everything?q=${topic}&from=2022-10-27&sortBy=publishedAt&apiKey=${apiKey}&language=en`;
+  url=`https://newsapi.org/v2/everything?q=${topic}&from=${yr}-${m}-${d}&sortBy=publishedAt&apiKey=${apiKey}&language=en`;
   try{
     fetch(url)
         .then((response) => response.json())
