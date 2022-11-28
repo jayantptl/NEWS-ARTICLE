@@ -1,0 +1,130 @@
+<html lang="en">
+
+  <%- include("./partials/head.ejs") %>
+
+<head>
+
+  <style>
+    body{
+      <% if(newsdata==undefined){ %>
+           height: 0vh;
+          <%} %>
+    }
+    footer{
+      <% if(newsdata==undefined){ %>
+        top: -20.8em;
+          <%} %>
+    }
+
+
+    .search {
+      position: relative;
+    display: block;
+    top: -0.8em;
+    left: 5%;
+    width: 30.2em;
+    }
+    input{
+
+      text-align: center;
+      height: 26px;
+      width: 145px;
+
+    border-radius: 10px;
+     position : relative;
+    left: -13.8em
+    }
+
+    .container {
+      position: relative;
+    
+      top: 5%;
+    left: 10%;
+    height: 100vh;
+    }
+
+    .news-link {
+      display: block;
+    }
+
+    footer {
+      position: relative;
+      top: 76%;
+    }
+    .news-head{
+      height: 3.7em;
+    }
+    .news-head a{
+      font-size: 19px;
+    color: #3232b1;
+    background-color: #ddf7e5;
+    }
+    .btn{
+    
+      position: relative;
+    top: -0.1em;
+    left: -12.8em;
+    border-radius: 10px;
+    height: 26px;
+    width: 61px;
+
+    }
+    label{
+      position: relative;
+    top: -1.8em;
+    left: 2.8em;
+    }
+    i{
+      height: 1.2em;
+    width: 4%;
+    }
+
+  </style>
+
+
+
+</head>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+  <form class="search" action="/getnews" method="POST">
+
+    <label for="news">Enter the topic to search news</label>
+    <input type="text" name="news" />
+    <!-- <input type="submit"> -->
+    <button class="btn" type="submit">search</button>
+  </form>
+
+  <div class="container">
+    <% if(newsdata!=undefined){ %>
+      <% let ln=newsdata.articles.length; %>
+        <% if(ln!=0) {%>
+          <% if(ln>20){ %>
+            <% ln=20; %>
+              <% } %>
+
+                <% for(let i=0;i < ln;i++) {%>
+
+                  <%let tit=newsdata.articles[i].title %>
+                    <%let Url=newsdata.articles[i].url%>
+                    
+                      <div class="news-head">
+                        <a href="<%=Url%> " target="_blank">
+                          <i class="fa-solid fa-hand-point-right"></i>
+                        <%= tit %>
+                        </a>
+                      </div>
+                      <% } %>
+
+                        <% } %>
+
+                          <% } %>
+  </div>
+
+
+  <%- include("./partials/footer.ejs") %>
+
+
+</body>
+
+</html>
